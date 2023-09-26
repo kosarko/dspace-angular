@@ -233,6 +233,13 @@ import { SearchNavbarComponent } from '../search-navbar/search-navbar.component'
 import { ThemedSearchNavbarComponent } from '../search-navbar/themed-search-navbar.component';
 import { ScopeSelectorModalComponent } from './search-form/scope-selector-modal/scope-selector-modal.component';
 import { DsSelectComponent } from './ds-select/ds-select.component';
+import { ClarinExtendedLicensePipe } from './utils/clarin-extended-license.pipe';
+import { ClarinLicenseCheckedPipe } from './utils/clarin-license-checked.pipe';
+import { ClarinLicenseLabelRadioValuePipe } from './utils/clarin-license-label-radio-value.pipe';
+import { CharToEndPipe } from './utils/char-to-end.pipe';
+import { ClarinLicenseRequiredInfoPipe } from './utils/clarin-license-required-info.pipe';
+import { ClarinItemBoxViewComponent } from './clarin-item-box-view/clarin-item-box-view.component';
+import { ClarinItemAuthorPreviewComponent } from './clarin-item-author-preview/clarin-item-author-preview.component';
 import { ContextHelpDirective } from './context-help.directive';
 import { ContextHelpWrapperComponent } from './context-help-wrapper/context-help-wrapper.component';
 import { RSSComponent } from './rss-feed/rss.component';
@@ -305,7 +312,13 @@ const PIPES = [
   ObjNgFor,
   BrowserOnlyPipe,
   MarkdownPipe,
-  ShortNumberPipe
+  ShortNumberPipe,
+  ObjNgFor,
+  ClarinExtendedLicensePipe,
+  ClarinLicenseCheckedPipe,
+  ClarinLicenseLabelRadioValuePipe,
+  ClarinLicenseRequiredInfoPipe,
+  CharToEndPipe
 ];
 
 const COMPONENTS = [
@@ -371,7 +384,10 @@ const COMPONENTS = [
   ContextHelpWrapperComponent,
   EpersonGroupListComponent,
   EpersonSearchBoxComponent,
-  GroupSearchBoxComponent
+  GroupSearchBoxComponent,
+  ScopeSelectorModalComponent,
+  ClarinItemBoxViewComponent,
+  ClarinItemAuthorPreviewComponent
 ];
 
 const ENTRY_COMPONENTS = [

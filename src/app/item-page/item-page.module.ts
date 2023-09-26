@@ -10,6 +10,9 @@ import {
   ItemPageAuthorFieldComponent
 } from './simple/field-components/specific-field/author/item-page-author-field.component';
 import {
+  ItemPageCitationFieldComponent
+} from './simple/field-components/specific-field/citation/item-page-citation.component';
+import {
   ItemPageDateFieldComponent
 } from './simple/field-components/specific-field/date/item-page-date-field.component';
 import {
@@ -40,6 +43,20 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MiradorViewerComponent } from './mirador-viewer/mirador-viewer.component';
 import { VersionPageComponent } from './version-page/version-page/version-page.component';
 import { ThemedFileSectionComponent } from './simple/field-components/file-section/themed-file-section.component';
+import { TombstoneComponent } from './tombstone/tombstone.component';
+import { ReplacedTombstoneComponent } from './tombstone/replaced-tombstone/replaced-tombstone.component';
+import { WithdrawnTombstoneComponent } from './tombstone/withdrawn-tombstone/withdrawn-tombstone.component';
+import { ClarinLicenseInfoComponent } from './clarin-license-info/clarin-license-info.component';
+import { ClarinRefBoxComponent } from './clarin-ref-box/clarin-ref-box.component';
+import { ClarinRefCitationComponent } from './clarin-ref-citation/clarin-ref-citation.component';
+import { ClarinRefFeaturedServicesComponent } from './clarin-ref-featured-services/clarin-ref-featured-services.component';
+import { ClarinRefCitationModalComponent } from './clarin-ref-citation-modal/clarin-ref-citation-modal.component';
+import { ClarinMatomoStatisticsComponent } from './clarin-matomo-statistics/clarin-matomo-statistics.component';
+import { ClarinStatisticsButtonComponent } from './clarin-statistics-button/clarin-statistics-button.component';
+import { ChartsModule } from 'ng2-charts';
+import { ClarinGenericItemFieldComponent } from './simple/field-components/clarin-generic-item-field/clarin-generic-item-field.component';
+import { ClarinCollectionsItemFieldComponent } from './simple/field-components/clarin-collections-item-field/clarin-collections-item-field.component';
+import { ClarinFilesItemFieldComponent } from './simple/field-components/clarin-files-item-field/clarin-files-item-field.component';
 import { OrcidAuthComponent } from './orcid-page/orcid-auth/orcid-auth.component';
 import { OrcidPageComponent } from './orcid-page/orcid-page.component';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
@@ -70,6 +87,7 @@ const DECLARATIONS = [
   ThemedFullItemPageComponent,
   MetadataUriValuesComponent,
   ItemPageAuthorFieldComponent,
+  ItemPageCitationFieldComponent,
   ItemPageDateFieldComponent,
   ItemPageAbstractFieldComponent,
   ItemPageUriFieldComponent,
@@ -92,6 +110,19 @@ const DECLARATIONS = [
   OrcidQueueComponent,
   ItemAlertsComponent,
   BitstreamRequestACopyPageComponent,
+  TombstoneComponent,
+  ReplacedTombstoneComponent,
+  WithdrawnTombstoneComponent,
+  ClarinLicenseInfoComponent,
+  ClarinRefBoxComponent,
+  ClarinRefCitationComponent,
+  ClarinRefFeaturedServicesComponent,
+  ClarinRefCitationModalComponent,
+  ClarinMatomoStatisticsComponent,
+  ClarinStatisticsButtonComponent,
+  ClarinGenericItemFieldComponent,
+  ClarinCollectionsItemFieldComponent,
+  ClarinFilesItemFieldComponent
 ];
 
 @NgModule({
@@ -110,13 +141,14 @@ const DECLARATIONS = [
     ResultsBackButtonModule,
     UploadModule,
     DsoPageModule,
+    ChartsModule
   ],
   declarations: [
     ...DECLARATIONS,
 
   ],
   exports: [
-    ...DECLARATIONS,
+    ...DECLARATIONS
   ]
 })
 export class ItemPageModule {

@@ -57,6 +57,7 @@ import { RelationshipDataService } from './data/relationship-data.service';
 import { ResourcePolicyDataService } from './resource-policy/resource-policy-data.service';
 import { SearchResponseParsingService } from './data/search-response-parsing.service';
 import { SiteDataService } from './data/site-data.service';
+import { MetadataValueDataService } from './data/metadata-value-data.service';
 import { DspaceRestService } from './dspace-rest/dspace-rest.service';
 import { EPersonDataService } from './eperson/eperson-data.service';
 import { EPerson } from './eperson/models/eperson.model';
@@ -132,6 +133,7 @@ import {
 import { Registration } from './shared/registration.model';
 import { MetadataSchemaDataService } from './data/metadata-schema-data.service';
 import { MetadataFieldDataService } from './data/metadata-field-data.service';
+import { DsDynamicTypeBindRelationService } from '../shared/form/builder/ds-dynamic-form-ui/ds-dynamic-type-bind-relation.service';
 import { TokenResponseParsingService } from './auth/token-response-parsing.service';
 import { SubmissionCcLicenseDataService } from './submission/submission-cc-license-data.service';
 import { SubmissionCcLicence } from './submission/models/submission-cc-license.model';
@@ -176,6 +178,15 @@ import { VocabularyEntryDetailsDataService } from './submission/vocabularies/voc
 import { IdentifierData } from '../shared/object-list/identifier-data/identifier-data.model';
 import { Subscription } from '../shared/subscriptions/models/subscription.model';
 import { SupervisionOrderDataService } from './supervision-order/supervision-order-data.service';
+import { ClarinLicenseDataService } from './data/clarin/clarin-license-data.service';
+import { ClarinLicenseLabelDataService } from './data/clarin/clarin-license-label-data.service';
+import { HandleDataService } from './data/handle-data.service';
+import { Handle } from './handle/handle.model';
+import { ClarinUserRegistrationDataService } from './data/clarin/clarin-user-registration.service';
+import { ClarinUserMetadataDataService } from './data/clarin/clarin-user-metadata.service';
+import { ClarinLicenseResourceMappingService } from './data/clarin/clarin-license-resource-mapping-data.service';
+import { ClarinVerificationTokenDataService } from './data/clarin/clarin-verification-token-data.service';
+import { ClruaDataService } from './data/clarin/clrua-data.service';
 
 /**
  * When not in production, endpoint responses can be mocked for testing purposes
@@ -204,6 +215,14 @@ const PROVIDERS = [
   CommunityDataService,
   CollectionDataService,
   SiteDataService,
+  MetadataValueDataService,
+  ClarinLicenseDataService,
+  ClarinLicenseLabelDataService,
+  ClruaDataService,
+  ClarinUserRegistrationDataService,
+  ClarinUserMetadataDataService,
+  ClarinLicenseResourceMappingService,
+  ClarinVerificationTokenDataService,
   DSOResponseParsingService,
   { provide: MOCK_RESPONSE_MAP, useValue: mockResponseMap },
   { provide: DspaceRestService, useFactory: restServiceFactory, deps: [MOCK_RESPONSE_MAP, HttpClient] },
@@ -255,6 +274,7 @@ const PROVIDERS = [
   ClaimedTaskDataService,
   PoolTaskDataService,
   BitstreamDataService,
+  DsDynamicTypeBindRelationService,
   EntityTypeDataService,
   ContentSourceResponseParsingService,
   ItemTemplateDataService,
@@ -298,7 +318,8 @@ const PROVIDERS = [
   OrcidAuthService,
   OrcidQueueDataService,
   OrcidHistoryDataService,
-  SupervisionOrderDataService
+  SupervisionOrderDataService,
+  HandleDataService
 ];
 
 /**
@@ -369,6 +390,8 @@ export const models =
     AccessStatusObject,
     IdentifierData,
     Subscription,
+    SubmissionAccessesModel,
+    Handle
   ];
 
 @NgModule({

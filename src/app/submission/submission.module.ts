@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 
+import { NgToggleModule } from '@nth-cloud/ng-toggle';
 import { SubmissionSectionFormComponent } from './sections/form/section-form.component';
 import { SectionsDirective } from './sections/sections.directive';
 import { SectionsService } from './sections/sections.service';
@@ -20,6 +21,7 @@ import { SectionUploadService } from './sections/upload/section-upload.service';
 import { SubmissionUploadFilesComponent } from './form/submission-upload-files/submission-upload-files.component';
 import { SubmissionSectionLicenseComponent } from './sections/license/section-license.component';
 import { SubmissionUploadsConfigDataService } from '../core/config/submission-uploads-config-data.service';
+import { SubmissionSectionClarinLicenseComponent } from './sections/clarin-license-resource/section-license.component';
 import { SubmissionEditComponent } from './edit/submission-edit.component';
 import { SubmissionSectionUploadFileComponent } from './sections/upload/file/section-upload-file.component';
 import {
@@ -66,14 +68,20 @@ import {
 } from './sections/sherpa-policies/metadata-information/metadata-information.component';
 import { SectionFormOperationsService } from './sections/form/section-form-operations.service';
 import {SubmissionSectionIdentifiersComponent} from './sections/identifiers/section-identifiers.component';
+import {SubmissionSectionClarinLicenseDistributionComponent} from './sections/clarin-license-distribution/clarin-license-distribution.component';
+import {SubmissionSectionClarinNoticeComponent} from './sections/clarin-notice/clarin-notice.component';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
   SubmissionSectionUploadComponent,
   SubmissionSectionFormComponent,
   SubmissionSectionLicenseComponent,
+  SubmissionSectionClarinLicenseComponent,
   SubmissionSectionCcLicensesComponent,
   SubmissionSectionAccessesComponent,
+  SubmissionSectionUploadFileEditComponent,
+  SubmissionSectionClarinLicenseDistributionComponent,
+  SubmissionSectionClarinNoticeComponent,
   SubmissionSectionSherpaPoliciesComponent,
 ];
 
@@ -120,6 +128,8 @@ const DECLARATIONS = [
     NgbCollapseModule,
     NgbAccordionModule,
     UploadModule,
+    NgbModalModule,
+    NgToggleModule
   ],
   declarations: DECLARATIONS,
   exports: [
