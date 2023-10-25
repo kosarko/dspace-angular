@@ -23,7 +23,7 @@ export const copyWebpackOptions = {
         }
       },
       transform(content) {
-        return JSON.stringify(JSON5.parse(content.toString()))
+        return JSON.stringify(JSON5.parse(content.toString()));
       }
     },
     {
@@ -49,6 +49,22 @@ export const copyWebpackOptions = {
     {
       from: path.join(__dirname, '..', 'src', 'robots.txt.ejs'),
       to: 'assets/robots.txt.ejs'
+    },
+    {
+      from: path.join(__dirname, '..', 'src', 'aai', 'aai.js'),
+      to: 'aai.js'
+    },
+    {
+      from: path.join(__dirname, '..', 'src', 'aai', 'aai_config.js'),
+      to: 'aai_config.js'
+    },
+    {
+      from: path.join(__dirname, '..', 'src', 'aai', 'discojuice', 'discojuice.js'),
+      to: 'discojuice.js'
+    },
+    {
+      from: path.join(__dirname, '..', 'src', 'static-files'),
+      to: 'static-files'
     }
   ]
 };

@@ -13,6 +13,7 @@ import { LegacyBitstreamUrlResolver } from './legacy-bitstream-url.resolver';
 import { BitstreamBreadcrumbResolver } from '../core/breadcrumbs/bitstream-breadcrumb.resolver';
 import { BitstreamBreadcrumbsService } from '../core/breadcrumbs/bitstream-breadcrumbs.service';
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
+import { ClarinBitstreamDownloadPageComponent } from './clarin-bitstream-download-page/clarin-bitstream-download-page.component';
 
 const EDIT_BITSTREAM_PATH = ':id/edit';
 const EDIT_BITSTREAM_AUTHORIZATIONS_PATH = ':id/authorizations';
@@ -42,10 +43,13 @@ const EDIT_BITSTREAM_AUTHORIZATIONS_PATH = ':id/authorizations';
       {
         // Resolve angular bitstream download URLs
         path: ':id/download',
-        component: BitstreamDownloadPageComponent,
+        component: ClarinBitstreamDownloadPageComponent,
+        // component: BitstreamDownloadPageComponent,
         resolve: {
-          bitstream: BitstreamPageResolver
+          bitstream: BitstreamPageResolver,
+          breadcrumb: I18nBreadcrumbResolver
         },
+        data: { breadcrumbKey: 'clarin.license.agreement' },
       },
       {
         path: EDIT_BITSTREAM_PATH,

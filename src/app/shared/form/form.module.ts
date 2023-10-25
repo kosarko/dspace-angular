@@ -40,6 +40,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ThemedExternalSourceEntryImportModalComponent } from './builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/themed-external-source-entry-import-modal.component';
 import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { DsDynamicAutocompleteComponent } from './builder/ds-dynamic-form-ui/models/autocomplete/ds-dynamic-autocomplete.component';
+import { DsDynamicSponsorAutocompleteComponent } from './builder/ds-dynamic-form-ui/models/sponsor-autocomplete/ds-dynamic-sponsor-autocomplete.component';
+import { DsDynamicSponsorScrollableDropdownComponent } from './builder/ds-dynamic-form-ui/models/sponsor-scrollable-dropdown/dynamic-sponsor-scrollable-dropdown.component';
 
 const COMPONENTS = [
   CustomSwitchComponent,
@@ -54,6 +57,9 @@ const COMPONENTS = [
   DsDynamicLookupRelationModalComponent,
   DsDynamicScrollableDropdownComponent,
   DsDynamicTagComponent,
+  DsDynamicAutocompleteComponent,
+  DsDynamicSponsorAutocompleteComponent,
+  DsDynamicSponsorScrollableDropdownComponent,
   DsDynamicOneboxComponent,
   DsDynamicRelationGroupComponent,
   DsDatePickerComponent,

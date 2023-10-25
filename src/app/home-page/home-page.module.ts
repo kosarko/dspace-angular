@@ -12,6 +12,8 @@ import { ThemedHomePageComponent } from './themed-home-page.component';
 import { RecentItemListComponent } from './recent-item-list/recent-item-list.component';
 import { JournalEntitiesModule } from '../entity-groups/journal-entities/journal-entities.module';
 import { ResearchEntitiesModule } from '../entity-groups/research-entities/research-entities.module';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsageReportDataService } from '../core/statistics/usage-report-data.service';
 
 const DECLARATIONS = [
   HomePageComponent,
@@ -29,6 +31,7 @@ const DECLARATIONS = [
     JournalEntitiesModule.withEntryComponents(),
     ResearchEntitiesModule.withEntryComponents(),
     HomePageRoutingModule,
+    NgbCarouselModule,
     StatisticsModule.forRoot()
   ],
   declarations: [
@@ -36,6 +39,9 @@ const DECLARATIONS = [
   ],
   exports: [
     ...DECLARATIONS,
+  ],
+  providers: [
+    UsageReportDataService,
   ],
 })
 export class HomePageModule {

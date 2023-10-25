@@ -32,7 +32,7 @@ services:
       solr__P__server: http://dspacesolr:8983/solr
     depends_on:
     - dspacedb
-    image: dspace/dspace:dspace-7_x-test
+    image: ${DSPACE_CI_IMAGE:-dataquest/dspace:dspace-7_x-test}
     networks:
       dspacenet:
     ports:
@@ -53,7 +53,7 @@ services:
     - '-c'
     - |
       while (!</dev/tcp/dspacedb/5432) > /dev/null 2>&1; do sleep 1; done;
-      /dspace/bin/dspace database migrate ignored
+      /dspace/bin/dspace database migrate force
       catalina.sh run
   # DSpace database container
   # NOTE: This is customized to use our loadsql image, so that we are using a database with existing test data
@@ -63,7 +63,7 @@ services:
       # This LOADSQL should be kept in sync with the LOADSQL in
       # https://github.com/DSpace/DSpace/blob/main/dspace/src/main/docker-compose/db.entities.yml
       # This SQL is available from https://github.com/DSpace-Labs/AIP-Files/releases/tag/demo-entities-data
-      LOADSQL: https://github.com/DSpace-Labs/AIP-Files/releases/download/demo-entities-data/dspace7-entities-data.sql
+      LOADSQL: https://github.com/dataquest-dev/DSpace/releases/download/data/dspace-test-database-dump_23.6.2023.sql
       PGDATA: /pgdata
     image: dspace/dspace-postgres-pgcrypto:loadsql
     networks:
@@ -76,7 +76,7 @@ services:
   dspacesolr:
     container_name: dspacesolr
     # Uses official Solr image at https://hub.docker.com/_/solr/
-    image: solr:8.11-slim
+    image: solr:8.11
     # Needs main 'dspace' container to start first to guarantee access to solr_configs
     depends_on:
     - dspace

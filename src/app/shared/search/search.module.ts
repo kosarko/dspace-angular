@@ -27,6 +27,7 @@ import { MissingTranslationHandler, TranslateModule } from '@ngx-translate/core'
 import { MissingTranslationHelper } from '../translate/missing-translation.helper';
 import { SharedModule } from '../shared.module';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { ClarinSearchComponent } from './clarin-search/clarin-search.component';
 import { SearchComponent } from './search.component';
 import { ThemedSearchComponent } from './themed-search.component';
 import { ThemedSearchResultsComponent } from './search-results/themed-search-results.component';
@@ -84,20 +85,23 @@ export const MODELS = [
 
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ClarinSearchComponent
   ],
   imports: [
     CommonModule,
     TranslateModule.forChild({
-      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationHelper },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationHelper},
       useDefaultLang: true
     }),
     SharedModule.withEntryComponents(),
+    SharedModule.withEntryComponents(),
     NouisliderModule,
   ],
-  exports: [
-    ...COMPONENTS
-  ]
+    exports: [
+        ...COMPONENTS,
+        ClarinSearchComponent
+    ]
 })
 export class SearchModule {
   /**

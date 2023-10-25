@@ -39,6 +39,8 @@ import { WorkflowItem } from '../../../core/submission/models/workflowitem.model
 import { SubmissionObject } from '../../../core/submission/models/submission-object.model';
 import { SubmissionSectionObject } from '../../objects/submission-section-object.model';
 import { SubmissionSectionError } from '../../objects/submission-section-error.model';
+import { SPONSOR_METADATA_NAME } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-complex.model';
+import { AUTHOR_METADATA_FIELD_NAME } from 'src/app/shared/form/builder/ds-dynamic-form-ui/models/clarin-name.model';
 
 /**
  * This component represents a section that contains a Form.
@@ -116,6 +118,14 @@ export class SubmissionSectionFormComponent extends SectionModelComponent {
    * @type {Array}
    */
   protected subs: Subscription[] = [];
+
+  protected workspaceItem: WorkspaceItem;
+
+  /**
+   * The timeout for checking if the sponsor was uploaded in the database
+   * The timeout is set to 20 seconds by default.
+   */
+  public sponsorRefreshTimeout = 20;
 
   protected submissionObject: SubmissionObject;
   /**
@@ -396,6 +406,69 @@ export class SubmissionSectionFormComponent extends SectionModelComponent {
     if ((environment.submission.autosave.metadata.indexOf(metadata) !== -1 && isNotEmpty(value)) || this.hasRelatedCustomError(metadata)) {
       this.submissionService.dispatchSave(this.submissionId);
     }
+
+    if (metadata === SPONSOR_METADATA_NAME) {
+      this.submissionService.dispatchSaveSection(this.submissionId, this.sectionData.id);
+      this.reinitializeForm(SPONSOR_METADATA_NAME, value);
+    }
+
+    if (metadata === AUTHOR_METADATA_FIELD_NAME) {
+      this.submissionService.dispatchSaveSection(this.submissionId, this.sectionData.id);
+      this.reinitializeForm(AUTHOR_METADATA_FIELD_NAME, value);
+    }
+  }
+
+  /**
+   * This method updates specific input field e.g. `local.sponsor` and check if the metadata value was updated
+   * in the DB. When the metadata is updated in the DB refresh this input field.
+   * The reason of this method: If the data is not actual in BE, the input field probably won't fill in suggested value
+   * into all input fields e.g., the user click on the suggested value for the `author` but the input fields
+   * are still empty.
+   *
+   * @param metadataField input field which is updating
+   * @param newMetadataValue value added to the input field
+   */
+  private reinitializeForm(metadataField, newMetadataValue) {
+    let metadataValueFromDB = '';
+    // Counter to count update request timeout (20s)
+    let counter = 0;
+
+    this.isUpdating = true;
+    const interval = setInterval( () => {
+      // Load item from the DB
+      this.submissionObjectService.findById(this.submissionId, true, false, followLink('item')).pipe(
+        getFirstSucceededRemoteData(),
+        getRemoteDataPayload())
+        .subscribe((payload) => {
+          if (isNotEmpty(payload.item)) {
+            payload.item.subscribe( item => {
+              if (isNotEmpty(item.payload) && isNotEmpty(item.payload.metadata[metadataField])) {
+                metadataValueFromDB = item.payload.metadata[metadataField];
+              }
+            });
+          }
+        });
+      // Check if new value is refreshed in the DB
+      if (Array.isArray(metadataValueFromDB) && isNotEmpty(metadataValueFromDB)) {
+        metadataValueFromDB.forEach((mv, index) => {
+          // @ts-ignore
+          if (metadataValueFromDB[index].value === newMetadataValue.value) {
+            // update form
+            this.formModel = undefined;
+            this.cdr.detectChanges();
+            this.ngOnInit();
+            clearInterval(interval);
+            this.isUpdating = false;
+          }
+        });
+      }
+      // Clear interval after 20s timeout
+      if (counter === ( this.sponsorRefreshTimeout * 1000 ) / 250) {
+        clearInterval(interval);
+        this.isUpdating = false;
+      }
+      counter++;
+    }, 250 );
   }
 
   private hasRelatedCustomError(medatata): boolean {
