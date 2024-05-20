@@ -1798,6 +1798,10 @@
 
   "form.other-information.orcid": "ORCID",
 
+  "form.other-information.credit-name": "Credit Name",
+
+  "form.other-information.other-names": "Other Names",
+
   "form.remove": "Remove",
 
   "form.save": "Save",
