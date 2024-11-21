@@ -3191,6 +3191,10 @@
 
   "login.form.or-divider": "or",
 
+  "login.auth.failed.shibboleth.title": "Shibboleth authentication failed",
+
+  "login.auth.failed.shibboleth.message": "Authentication failed because your IDP did not send the required Shibboleth headers. Please contact the Help Desk by email: {{ email }} .",
+
   "login.title": "Login",
 
   "login.breadcrumbs": "Login",
@@ -5964,4 +5968,9 @@
 
   "change.submitter.page.changed-error": "An error occurred while changing the submitter",
 
+  "change.submitter.page.cannot.see.submitter.message": "You do not have permission to see submitter information.",
+
+  "change.submitter.page.items.handle.message": "Item's handle: ",
+
+  "change.submitter.page.items.name.message": "Item's name: ",
 }
