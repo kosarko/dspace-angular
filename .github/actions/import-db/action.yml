@@ -27,7 +27,7 @@ runs:
     - uses: actions/checkout@v4
       with:
         repository: dataquest-dev/dspace-import
-        ref: 'main'
+        ref: 'eaa122481ac3837d7d7dc66a8dfc423e9e2a99aa'
         submodules: 'recursive'
         path: 'dspace-import'
 
